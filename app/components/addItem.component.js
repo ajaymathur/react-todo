@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, TouchableHighlight, TextInput, View, Button, StyleSheet} from 'react-native';
+import {Text, TouchableHighlight, TextInput, View, Button, StyleSheet,TouchableOpacity} from 'react-native';
 
 export class AddItem extends Component {
 
@@ -10,24 +10,30 @@ export class AddItem extends Component {
 
     render() {
         return (
-            <View style={buttonStyles.addItem}>
-                <TextInput
+            <View style={styles.addItem}>
+                {/*<TextInput
                 style = {{height: 40}}
                 onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
-                />
+                />*/}
+                
                 <Button
                     title='Add'
+                    style={styles.defaultBtn}
                     onPress={() => null}
                 />
+                
             </View>
         );
     }
 }
 
-var buttonStyles = StyleSheet.create({
-    addItem: {
-        borderWidth: 1,
-        borderColor: '#0000ff',
+var styles = StyleSheet.create({
+    defaultBtn: {
+        backgroundColor:'#ff0000',
+        color:'#ffffff',
+        
+
     }
+   
 })

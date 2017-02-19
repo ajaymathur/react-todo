@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, TouchableHighlight} from 'react-native';
+import {Text, TouchableHighlight, StyleSheet,View} from 'react-native';
 
 export class Todolist extends Component {
 
