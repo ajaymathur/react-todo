@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Navigator,
   TouchableHighlight,
-  Text
+  Text,
+  View
 } from 'react-native';
 
 import { Todolist } from './app/components/todoList.component';
@@ -44,41 +45,68 @@ var NavigationRouteMapper = {
 
 export default class CreatingNavigation extends Component {
 
- 
-
-  renderScene(route, navigator) {
-    if ( route.name === 'Todolist') {
-      return (<Todolist navigator={navigator}>Ajay</Todolist>)
+ initRenderScene=(route,navigator) =>{
+ if ( route.name === 'Todolist') {
+      return (<Todolist style={styles.Todolist} navigator={navigator}>Ajay</Todolist>)
     }
     if ( route.name === 'Todo' ) {
-      return (<Todo navigator={navigator}></Todo>)
+      return (<Todo style={styles.Todo} navigator={navigator}></Todo>)
     }
+ }
+
+  renderScene=(route, navigator)=> {
+    return(
+      <View style={styles.routerOutlet}>
+        {this.initRenderScene(route, navigator)}
+      </View>
+    )
+   
   }
 
   render() {
      return (
+       <View style={styles.container}> 
         <Navigator
           style = {styles.navigator}
           initialRoute = {{ name: 'Todolist'}}
           renderScene = {this.renderScene}
-          style = {{padding: 50}}
+          
           navigationBar = {
             <Navigator.NavigationBar 
             routeMapper = { NavigationRouteMapper }
-            style = {styles.nav}
+            style = {styles.navBar}
           />}
         />
+
+</View>
      )
   }
 }
 
 const styles = StyleSheet.create({
+  contentSection:{
+    
+    backgroundColor:'#cccccc',
+  },
+  container:{
+    flex:1,
+    alignSelf:'stretch',
+  },
   navigator: {
+    
+  
   },
-  nav: {
-    flex: 1,
-    backgroundColor: '#0000ff',
+  navBar:{
+    backgroundColor:'#fff',
+    height:50
   },
+      
+  
+ routerOutlet:{
+backgroundColor :'#cccccc',
+paddingTop:50,
+flex:4
+ },
   instructions: {
     textAlign: 'center',
     color: '#333333',
