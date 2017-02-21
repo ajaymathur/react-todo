@@ -1,14 +1,28 @@
-import React, {Component} from 'react';
+import React, {Component, propTypes} from 'react';
 import {Text, TouchableHighlight, TextInput, View, Button, StyleSheet} from 'react-native';
 
 export class AddItem extends Component {
 
+    props: {
+        buttonAction: string,
+    };
+
+    static propTypes = {
+        buttonAction: React.PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
         this.state = { text : 'Placeholder'}
+    };
+
+    _addItem() {
+        this.props.buttonAction(this.state.text);
     }
 
     render() {
+        const {buttonAction} = this.props;
+
         return (
             <View style={buttonStyles.addItem}>
                 <TextInput
@@ -18,7 +32,7 @@ export class AddItem extends Component {
                 />
                 <Button
                     title='Add'
-                    onPress={() => null}
+                    onPress={this._addItem.bind(this)}
                 />
             </View>
         );
