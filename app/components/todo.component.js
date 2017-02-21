@@ -8,11 +8,34 @@ export class Todo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {name: ['Ajay']}
+        this.state = {name: [{title: 'Ajay',completed: 0, id: 0}, {title: 'Ajay second', completed: 1, id: 1}]};
     }
 
     componentDidMount() {
         this._getList().done();
+        //this.__resetSynStore().done();
+    }
+
+    _taskToggled(index) {
+        try{
+            console.log("called form task toffle");
+            let newList = [...this.state.name];
+            console.log(index, newList);
+            newList[index].completed = newList[index].completed === 0 ? 1 : 0;
+            this.setState({
+                name: newList
+            })
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    __resetSynStore = async() => {
+        try {
+            await AsyncStorage.removeItem('testing')
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     _getList = async() => {
@@ -34,12 +57,13 @@ export class Todo extends Component {
         try {
             var that = this;
             console.log('button clicked', e);
-            let newName = [...this.state.name, e]
+            let tempObj = {title: e, completed: 0, id: this.state.name.length};
+            let newName = [...this.state.name, tempObj]
             that.setState({
                 name: newName
             })
             let listName = 'testing';
-            await AsyncStorage.setItem(listName, JSON.stringify([...this.state.name, e]))            
+            await AsyncStorage.setItem(listName, JSON.stringify([...this.state.name, tempObj]))            
         } catch (e) {
             console.log(e);
         }
@@ -53,6 +77,7 @@ export class Todo extends Component {
         return (
             <View style={styles.totoAddItem}>
                 <ListOfTodo
+                    taskToggled={this._taskToggled.bind(this)}
                     dataList = {this.state.name}
                     style={styles.addItemForm}
                 />

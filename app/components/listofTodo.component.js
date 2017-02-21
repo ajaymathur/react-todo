@@ -1,11 +1,23 @@
 import React, {Component, PropTypes} from 'react';
-import {ListView, Text, StyleSheet} from 'react-native';
+import {View, ListView, Text, StyleSheet} from 'react-native';
 
 class ListofTodo extends Component {
 
     constructor(props) {
         super(props);
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    }
+
+    taskToggled(rowData) {
+        this.props.taskToggled(rowData.id);
+    }
+
+    _stylesCalculator(isCompleted) {
+        var obj = {
+            fontSize: 20,
+            backgroundColor: '#00ff00',
+        }
+        return isCompleted === 0 ? obj : {...obj, textDecorationLine: 'line-through'}
     }
 
     render() {
@@ -15,7 +27,11 @@ class ListofTodo extends Component {
             <ListView
                 
                 dataSource = {dataRows}
-                renderRow={(rowData) => <Text style = {styles.list}>{rowData}</Text>}
+                renderRow={(rowData) => 
+                        <View>
+                            <Text onPress={this.taskToggled.bind(this, rowData)} style={rowData.completed === 0 ? styles.list : styles.listCompleted}>{rowData.title}</Text>
+                        </View>
+                    }
             />
         )
     }
@@ -23,8 +39,13 @@ class ListofTodo extends Component {
 
 const styles = StyleSheet.create({
     list: {
-        height: 20,
-        backgroundColor: '#00ff00'
+        fontSize: 20,
+        backgroundColor: '#00ff00',
+    },
+    listCompleted: {
+        fontSize: 20,
+        backgroundColor: '#00ff00',
+        textDecorationLine: 'line-through'
     }
 })
 

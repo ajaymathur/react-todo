@@ -21,7 +21,6 @@ export class AddItem extends Component {
     }
 
     render() {
-        const {buttonAction} = this.props;
 
         return (
             <View style={styles.addItem}>
