@@ -17,6 +17,9 @@ import {
 import { Todolist } from './app/components/todoList.component';
 import { Todo } from './app/components/todo.component';
 
+
+
+
 var NavigationRouteMapper = {
   LeftButton( route, navigator) {
     if ( route.name === 'Todolist') {
@@ -65,10 +68,15 @@ export default class CreatingNavigation extends Component {
 
   render() {
      return (
+       <Todo 
+        style={styles.nav}
+        listHeading={'Gym'}
+        >
+        {/*<Navigator
        <View style={styles.container}> 
         <Navigator
           style = {styles.navigator}
-          initialRoute = {{ name: 'Todolist'}}
+          initialRoute = {{ name: 'Todo'}}
           renderScene = {this.renderScene}
           
           navigationBar = {
@@ -76,9 +84,8 @@ export default class CreatingNavigation extends Component {
             routeMapper = { NavigationRouteMapper }
             style = {styles.navBar}
           />}
-        />
-
-</View>
+        />*/}
+        </Todo>
      )
   }
 }
@@ -96,9 +103,9 @@ const styles = StyleSheet.create({
     
   
   },
-  navBar:{
-    backgroundColor:'#fff',
-    height:50
+  nav: {
+    backgroundColor: '#0000ff',
+    padding: 50,
   },
       
   
