@@ -1,5 +1,5 @@
 import React, {Component, propTypes} from 'react';
-import {Text, TouchableHighlight, TextInput, View, Button, StyleSheet} from 'react-native';
+import {Text, TouchableHighlight, TextInput, View, Button, StyleSheet,TouchableOpacity} from 'react-native';
 
 export class AddItem extends Component {
 
@@ -24,24 +24,27 @@ export class AddItem extends Component {
         const {buttonAction} = this.props;
 
         return (
-            <View style={buttonStyles.addItem}>
+            <View style={styles.addItem}>
                 <TextInput
                 style = {{height: 40}}
                 onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
+                
                 <Button
                     title='Add'
                     onPress={this._addItem.bind(this)}
+                    style={styles.defaultBtn}
                 />
             </View>
         );
     }
 }
 
-var buttonStyles = StyleSheet.create({
-    addItem: {
-        borderWidth: 1,
-        borderColor: '#0000ff',
+var styles = StyleSheet.create({
+    defaultBtn: {
+        backgroundColor:'#ff0000',
+        color:'#ffffff',
     }
+   
 })

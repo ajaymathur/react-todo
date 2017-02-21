@@ -51,19 +51,32 @@ export class Todo extends Component {
 
     render() {
         return (
-            <View style={todoStyles.totoAddItem}>
+            <View style={styles.totoAddItem}>
                 <ListOfTodo
                     dataList = {this.state.name}
+                    style={styles.addItemForm}
                 />
                 <AddItem
                     buttonAction={this._addItem}
+                    style={styles.addSubmit}
                 />
             </View>
         );
     }
 }
 
-var todoStyles = StyleSheet.create({
-    totoAddItem:{
+const styles = StyleSheet.create({
+    toDoAddItem: {
+        flex: 1,
+    },
+    addItemForm: {
+        flex: 2,
+
+    },
+    addSubmit: {
+        flex: 1,
+        justifyContent:'flex-end',
+
     }
+
 })
