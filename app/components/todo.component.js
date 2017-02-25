@@ -91,17 +91,17 @@ export class Todo extends Component {
 }
 
 const styles = StyleSheet.create({
-    toDoAddItem: {
-        flex: 1,
-    },
-    addItemForm: {
-        flex: 2,
+    // toDoAddItem: {
+    //     flex: 1,
+    // },
+    // addItemForm: {
+    //     flex: 2,
 
-    },
-    addSubmit: {
-        flex: 1,
-        justifyContent:'flex-end',
+    // },
+    // addSubmit: {
+    //     flex: 1,
+    //     justifyContent:'flex-end',
 
-    }
+    // }
 
 })
