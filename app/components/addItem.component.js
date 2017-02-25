@@ -31,7 +31,7 @@ export class AddItem extends Component {
                 />
                 
                 <Button
-                    title='Add'
+                    title='Add Event'
                     onPress={this._addItem.bind(this)}
                     style={styles.defaultBtn}
                 />
