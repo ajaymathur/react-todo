@@ -17,7 +17,7 @@ export class Todolist extends Component {
     }
 
     componentDidMount() {
-       this._populateStorage().done();
+       //this._populateStorage().done();
     }
 
     _populateStorage = async() => {
@@ -39,22 +39,33 @@ export class Todolist extends Component {
         return null;
     }
 
-    _navigator() {
-        // this.props.navigator.push({
-        //     name: 'Todo'
-        // })
-        return null;
+    _navigator(listId) {
+        this.props.navigator.push({
+            name: 'Todo',
+            passProps: {
+                listId
+            },
+        })
+        //return null;
     }
 
     render() {
         return (
-            <View style={{padding: 50}} onPress={ this._navigator.bind(this) }>
-                <Text>Go to todo</Text>
+            <View style={{padding: 50}}>
+                <View>
+                    <Button
+                        onPress={this._navigator.bind(this, "new")}
+                        title='+'
+                    >
+                    </Button>
+                </View>
                 <Button
                     title='click to pick async storage'
-                    onPress={ this._getItemStorage.bind(this) }
+                    onPress={ this._navigator.bind(this) }
                 ></Button>
             </View>
         );
     }
 }
+
+
