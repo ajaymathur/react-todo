@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, TouchableHighlight, View, StyleSheet, AsyncStorage} from 'react-native';
+import {Text, TouchableHighlight, View, StyleSheet, AsyncStorage, Button} from 'react-native';
 
 import { AddItem } from './addItem.component';
 import ListOfTodo from './listofTodo.component';
@@ -74,6 +74,7 @@ export class Todo extends Component {
     }
 
     render() {
+        console.log(this.props.listId);
         return (
             <View style={styles.totoAddItem}>
                 <ListOfTodo
@@ -91,17 +92,15 @@ export class Todo extends Component {
 }
 
 const styles = StyleSheet.create({
-    // toDoAddItem: {
-    //     flex: 1,
-    // },
-    // addItemForm: {
-    //     flex: 2,
 
-    // },
-    // addSubmit: {
-    //     flex: 1,
-    //     justifyContent:'flex-end',
-
-    // }
+    toDoAddItem: {
+        flex: 1,
+    },
+    addItemForm: {
+        height: 80,
+    },
+    addSubmit: {
+        height: 20
+    }
 
 })
