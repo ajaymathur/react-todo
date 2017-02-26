@@ -17,7 +17,7 @@ export class Todolist extends Component {
     }
 
     componentDidMount() {
-       //this._populateStorage().done();
+       this._populateStorage().done();
     }
 
     _populateStorage = async() => {
@@ -51,8 +51,9 @@ export class Todolist extends Component {
 
     render() {
         return (
-            <View style={{padding: 50}}>
+            <View >
                 <View>
+                    <Text>{this.props.children}</Text>
                     <Button
                         onPress={this._navigator.bind(this, "new")}
                         title='+'

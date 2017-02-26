@@ -13,6 +13,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+
 } from 'react-native'
 
 import { Todolist } from './app/components/todoList.component';
@@ -27,8 +28,9 @@ var NavigationRouteMapper = {
       return null
     } else {
       return <TouchableHighlight
-              onPress = { () => navigator.pop()}>
-              <Text>Back</Text>
+              onPress = { () => navigator.pop()}
+             >
+              <Text  style={styles.leftNav}>Back</Text>
             </TouchableHighlight>
     }
   },
@@ -37,14 +39,14 @@ var NavigationRouteMapper = {
      if ( route.name === 'Todolist') {
       return <TouchableHighlight
               onPress = { () => navigator.push({name : 'Todo'})}>
-              <Text>Create</Text>
+              <Text  style={styles.rightNav}>Create</Text>
             </TouchableHighlight>
     } else {
       return null
     }
   },
   Title( route, navigator) {
-    return <Text>Todo</Text>
+    return <Text  style={styles.title}>Todo</Text>
   }
 }
 
@@ -52,10 +54,16 @@ export default class CreatingNavigation extends Component {
 
  initRenderScene=(route,navigator) =>{
  if ( route.name === 'Todolist') {
-      return (<Todolist style={styles.Todolist} navigator={navigator}>Ajay</Todolist>)
+      return (
+        <View style={styles.Todolist}>
+      <Todolist  navigator={navigator}>Ajay</Todolist></View>)
     }
     if ( route.name === 'Todo' ) {
-      return (<Todo style={styles.Todo} navigator={navigator} {...route.passProps}></Todo>)
+      return (
+      <View style={styles.Todo} >
+      <Todo navigator={navigator} {...route.passProps}></Todo>
+      </View>
+      )
     }
  }
 
@@ -86,34 +94,58 @@ export default class CreatingNavigation extends Component {
 }
 
 const styles = StyleSheet.create({
-  contentSection:{
-    
-    backgroundColor:'#cccccc',
-  },
-  container:{
-    flex:1,
-    alignSelf:'stretch',
-  },
-  navigator: {
-    
   
+  container:{
+    //flex:1,
+    //alignSelf:'stretch',
+  },
+  
+  Todolist:{
+    // backgroundColor:'red',
+    // flex:1
+    flexDirection:"column",
+    justifyContent:'space-between',
+  },
+  navBar:{
+paddingTop:20,
+height:64,
+backgroundColor:'#F4F4F4',
+borderBottomWidth: StyleSheet.hairlineWidth,
+borderBottomColor:'#DDDDDD',
+paddingHorizontal:12,
+overflow:'hidden',
+//  flex:1,
+//  flexDirection:'row',
+//  justifyContent:'space-between',
+//  alignItems:'center',
+  },
+  leftNav :{
+    color:'#089de3',
+  },
+  rightNav :{
+    color:'#089de3',
+  },
+  title :{
+    fontWeight:'bold',
   },
   nav: {
-    backgroundColor: '#0000ff',
-    padding: 50,
+    //backgroundColor: '#0000ff',
+    //padding: 50,
   },
-      
+    Todo:{
+//flex:1,
+    //  flexDirection:'column',
+    //   justifyContent:'space-between',
+    //   alignItems:'center'
+    },
+
   
  routerOutlet:{
-backgroundColor :'#cccccc',
-paddingTop:50,
-flex:4
- },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+backgroundColor :'#fff',
+paddingTop:64,
+flex:1,
+
+ }
 });
 
 AppRegistry.registerComponent('CreatingNavigation', () => CreatingNavigation);

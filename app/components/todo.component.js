@@ -77,15 +77,16 @@ export class Todo extends Component {
         console.log(this.props.listId);
         return (
             <View style={styles.totoAddItem}>
+                <AddItem
+                    buttonAction={this._addItem}
+                    style={styles.addSubmit}
+                />
                 <ListOfTodo
                     taskToggled={this._taskToggled.bind(this)}
                     dataList = {this.state.name}
                     style={styles.addItemForm}
                 />
-                <AddItem
-                    buttonAction={this._addItem}
-                    style={styles.addSubmit}
-                />
+                
             </View>
         );
     }

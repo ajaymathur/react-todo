@@ -3,9 +3,9 @@ import {Text, TouchableHighlight, TextInput, View, Button, StyleSheet,TouchableO
 
 export class AddItem extends Component {
 
-    props: {
-        buttonAction: string,
-    };
+    // props: {
+    //     buttonAction: string,
+    // };
 
     static propTypes = {
         buttonAction: React.PropTypes.func.isRequired
@@ -25,7 +25,7 @@ export class AddItem extends Component {
         return (
             <View style={styles.addItem}>
                 <TextInput
-                style = {{height: 40}}
+                style = {styles.textBox}
                 onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
@@ -41,9 +41,18 @@ export class AddItem extends Component {
 }
 
 var styles = StyleSheet.create({
-    defaultBtn: {
-        backgroundColor:'#ff0000',
-        color:'#ffffff',
+    
+    addItem:{
+        //alignItems:'flex-end'
+        flexDirection:'row',
+        justifyContent:'flex-start'
+    },
+    textBox:{
+        flex:2,
+
+    },
+    defaultBtn:{
+        flex:1
     }
    
 })
