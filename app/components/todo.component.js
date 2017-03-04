@@ -8,7 +8,7 @@ export class Todo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {name: [{title: 'Ajay',completed: 0, id: 0}, {title: 'Ajay second', completed: 1, id: 1}]};
+        this.state = {name: [], completeList: []};
     }
 
     componentDidMount() {
@@ -38,13 +38,35 @@ export class Todo extends Component {
         }
     }
 
+    __getUniqueId() {
+        let uniqueId, now = new Date();
+        'xxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            uniqueId = v.toString(16);
+        });
+        return uniqueId + now.getTime();
+    }
+
     _getList = async() => {
         try {
-            let listName = 'testing';
-            let value = await AsyncStorage.getItem(listName);
-            if (value != null) {
+            var that = this;
+            let listIdTemp = this.props.listId;
+            console.log(listIdTemp);
+            if ( "new" === listIdTemp) {
                 this.setState({
-                    'name': JSON.parse(value),
+                    listName: that.__getUniqueId()
+                }) 
+            } else {
+                this.setState({
+                    listName: listIdTemp
+                });
+            }
+            let value = await AsyncStorage.getItem('todoList');
+            let parsedValue = JSON.parse(value);
+            if (parsedValue != null && parsedValue[listIdTemp]) {
+                this.setState({
+                    'name': parsedValue[listIdTemp],
+                    'completeList': parsedValue,
                 })
             }
         } catch (e) {
@@ -58,12 +80,18 @@ export class Todo extends Component {
             var that = this;
             console.log('button clicked', e);
             let tempObj = {title: e, completed: 0, id: this.state.name.length};
-            let newName = [...this.state.name, tempObj]
+            let newName = [...this.state.name, tempObj];
             that.setState({
-                name: newName
-            })
-            let listName = 'testing';
-            await AsyncStorage.setItem(listName, JSON.stringify([...this.state.name, tempObj]))            
+                name: newName,
+            });
+
+            let updatedListTemp = that.state.completeList || {};
+            updatedListTemp[that.state.listName] = newName;
+            //let newCompleteList = {...that.state.completeList, updatedListTemp};
+
+            //let listName = this.state.listName;
+            console.log('updated list : ', updatedListTemp)
+            await AsyncStorage.setItem('todoList', JSON.stringify(updatedListTemp));
         } catch (e) {
             console.log(e);
         }
@@ -74,7 +102,6 @@ export class Todo extends Component {
     }
 
     render() {
-        console.log(this.props.listId);
         return (
             <View style={styles.totoAddItem}>
                 <ListOfTodo

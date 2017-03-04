@@ -9,7 +9,7 @@ class ListofTodo extends Component {
     }
 
     taskToggled(rowData) {
-        this.props.taskToggled(rowData.id);
+        this.props.taskToggled(rowData);
     }
 
     _stylesCalculator(isCompleted) {
@@ -27,9 +27,11 @@ class ListofTodo extends Component {
             <ListView
                 
                 dataSource = {dataRows}
-                renderRow={(rowData) => 
+                renderRow={(rowData, sectionID, rowID) => 
                         <View>
-                            <Text onPress={this.taskToggled.bind(this, rowData)} style={rowData.completed === 0 ? styles.list : styles.listCompleted}>{rowData.title}</Text>
+                            <Text onPress={this.taskToggled.bind(this, rowID)} 
+                                style={rowData.completed === 0 ? styles.list : styles.listCompleted}
+                            >{rowData.title}</Text>
                         </View>
                     }
             />
