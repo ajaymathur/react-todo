@@ -124,6 +124,7 @@ overflow:'hidden',
   },
   rightNav :{
     color:'#089de3',
+    padding: 10
   },
   title :{
     fontWeight:'bold',
