@@ -11,8 +11,9 @@ import {
   Navigator,
   TouchableHighlight,
   Text,
-  View
-} from 'react-native';
+  View,
+  TouchableOpacity,
+} from 'react-native'
 
 import { Todolist } from './app/components/todoList.component';
 import { Todo } from './app/components/todo.component';
@@ -31,6 +32,7 @@ var NavigationRouteMapper = {
             </TouchableHighlight>
     }
   },
+  
   RightButton( route, navigator) {
      if ( route.name === 'Todolist') {
       return <TouchableHighlight
@@ -53,7 +55,7 @@ export default class CreatingNavigation extends Component {
       return (<Todolist style={styles.Todolist} navigator={navigator}>Ajay</Todolist>)
     }
     if ( route.name === 'Todo' ) {
-      return (<Todo style={styles.Todo} navigator={navigator}></Todo>)
+      return (<Todo style={styles.Todo} navigator={navigator} {...route.passProps}></Todo>)
     }
  }
 
@@ -68,15 +70,9 @@ export default class CreatingNavigation extends Component {
 
   render() {
      return (
-       <Todo 
-        style={styles.nav}
-        listHeading={'Gym'}
-        >
-        {/*<Navigator
-       <View style={styles.container}> 
         <Navigator
           style = {styles.navigator}
-          initialRoute = {{ name: 'Todo'}}
+          initialRoute = {{ name: 'Todolist'}}
           renderScene = {this.renderScene}
           
           navigationBar = {
@@ -84,8 +80,7 @@ export default class CreatingNavigation extends Component {
             routeMapper = { NavigationRouteMapper }
             style = {styles.navBar}
           />}
-        />*/}
-        </Todo>
+        />
      )
   }
 }
