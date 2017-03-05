@@ -128,9 +128,6 @@ export class Todo extends Component {
                     buttonAction={this._addItem.bind(this)}
                     style={styles.addSubmit}
                 />
-                <Text>
-                    {JSON.stringify(this.state.selectedList)}
-                </Text>
             </View>
         );
     }

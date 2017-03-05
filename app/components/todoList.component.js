@@ -12,7 +12,8 @@ export class Todolist extends Component {
 
     componentDidMount() {
        //this._populateStorage().done();
-       this.__getList().done();
+       //this._populateStorage().done();
+       //this.__getList().done();
        //this._populateStorage().done();
     }
 
@@ -83,6 +84,7 @@ export class Todolist extends Component {
     }
 
     render() {
+        this.__getList().done();
         return (
             <View style={{padding: 50}}>
                 
