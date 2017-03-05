@@ -3,10 +3,6 @@ import {Text, TouchableHighlight, TextInput, View, Button, StyleSheet,TouchableO
 
 export class AddItem extends Component {
 
-    props: {
-        buttonAction: string,
-    };
-
     static propTypes = {
         buttonAction: React.PropTypes.func.isRequired
     };
@@ -21,12 +17,11 @@ export class AddItem extends Component {
     }
 
     render() {
-
         return (
             <View style={styles.addItem}>
                 <TextInput
-                style = {{height: 40}}
-                onChangeText={(text) => this.setState({text})}
+                    style = {{height: 40}}
+                    onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
                 

@@ -5,11 +5,10 @@ class ListofTodo extends Component {
 
     constructor(props) {
         super(props);
-        this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     }
 
-    taskToggled(rowData) {
-        this.props.taskToggled(rowData);
+    taskToggled(rowId) {
+        this.props.taskToggled(rowId);
     }
 
     _stylesCalculator(isCompleted) {
@@ -22,14 +21,15 @@ class ListofTodo extends Component {
 
     render() {
         const {dataList} = this.props;
-        let dataRows = this.ds.cloneWithRows(dataList);
+        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        let dataRows = ds.cloneWithRows(dataList);
         return(
             <ListView
                 
                 dataSource = {dataRows}
-                renderRow={(rowData, sectionID, rowID) => 
+                renderRow={(rowData, sectionId,rowId) => 
                         <View>
-                            <Text onPress={this.taskToggled.bind(this, rowID)} 
+                            <Text onPress= {this.taskToggled.bind(this, rowId)}
                                 style={rowData.completed === 0 ? styles.list : styles.listCompleted}
                             >{rowData.title}</Text>
                         </View>
