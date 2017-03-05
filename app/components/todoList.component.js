@@ -13,7 +13,7 @@ export class Todolist extends Component {
     componentDidMount() {
        //this._populateStorage().done();
        this.__getList().done();
-       //this._populateStorage();
+       //this._populateStorage().done();
     }
 
     /**
@@ -47,7 +47,7 @@ export class Todolist extends Component {
 
     _populateStorage = async() => {
         try{
-            await AsyncStorage.setItem('todoList', JSON.stringify({'324324-234324234-234234234-23423423234324423': [{'title': 'clean', 'completed': true}]}));
+            await AsyncStorage.setItem('todoList', JSON.stringify({'a324324': [{'title': 'clean', 'completed': true}]}));
             console.log('successfully set')
         } catch (e) {
             console.log(e)

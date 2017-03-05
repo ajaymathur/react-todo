@@ -8,7 +8,7 @@ export class Todo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {name: [], completeList: []};
+        this.state = {selectedList: [], completeList: []};
     }
 
     componentDidMount() {
@@ -16,14 +16,55 @@ export class Todo extends Component {
         //this.__resetSynStore().done();
     }
 
+    /**
+     * @author ajay narain mathur
+     * @description This will pull the list as per the key received
+     *              from the todo list screen
+     * @type high priority
+     */
+
+     _getList = async() => {
+        try {
+            let that = this;
+            let listIdTemp = this.props.listId;
+            if ( "new" === listIdTemp) {
+                this.setState({
+                    listName: that.__getUniqueId()
+                }) 
+            } else {
+                this.setState({
+                    listName: listIdTemp
+                });
+            }
+            let value = await AsyncStorage.getItem('todoList');
+            let parsedValue = JSON.parse(value);
+            if (parsedValue != null ) {
+                this.setState({
+                    'completeList': parsedValue,
+                });
+                if ( parsedValue[listIdTemp] ) {
+                    this.setState({
+                        'selectedList': parsedValue[listIdTemp],
+                    });
+                }
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * @author ajay narain mathur
+     * @param { index of the task in the list that is toggled } index 
+     * @type priority high
+     */
+
     _taskToggled(index) {
         try{
-            console.log("called form task toffle");
-            let newList = [...this.state.name];
-            console.log(index, newList);
+            let newList = [...this.state.selectedList];
             newList[index].completed = newList[index].completed === 0 ? 1 : 0;
             this.setState({
-                name: newList
+                selectedList: newList
             })
         } catch(e) {
             console.log(e);
@@ -47,51 +88,25 @@ export class Todo extends Component {
         return uniqueId + now.getTime();
     }
 
-    _getList = async() => {
-        try {
-            var that = this;
-            let listIdTemp = this.props.listId;
-            console.log(listIdTemp);
-            if ( "new" === listIdTemp) {
-                this.setState({
-                    listName: that.__getUniqueId()
-                }) 
-            } else {
-                this.setState({
-                    listName: listIdTemp
-                });
-            }
-            let value = await AsyncStorage.getItem('todoList');
-            let parsedValue = JSON.parse(value);
-            if (parsedValue != null && parsedValue[listIdTemp]) {
-                this.setState({
-                    'name': parsedValue[listIdTemp],
-                    'completeList': parsedValue,
-                })
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
+    /**
+     * @author ajay narain mathur
+     * @description This method is used to add item to the list
+     * @type priority high
+     * @version 0.0.0
+     */
     _addItem = async(e) => {
-        
         try {
             var that = this;
-            console.log('button clicked', e);
-            let tempObj = {title: e, completed: 0, id: this.state.name.length};
-            let newName = [...this.state.name, tempObj];
+            let tempObj = {title: e, completed: 0};
+            let newSelectedTaskList = [...this.state.selectedList, tempObj];
             that.setState({
-                name: newName,
+                selectedList: newSelectedTaskList,
             });
 
-            let updatedListTemp = that.state.completeList || {};
-            updatedListTemp[that.state.listName] = newName;
-            //let newCompleteList = {...that.state.completeList, updatedListTemp};
-
-            //let listName = this.state.listName;
-            console.log('updated list : ', updatedListTemp)
-            await AsyncStorage.setItem('todoList', JSON.stringify(updatedListTemp));
+            let tempCompleteList = this.state.completeList || {};
+            tempCompleteList[that.state.listName] = newSelectedTaskList;
+            console.log(tempCompleteList);
+            AsyncStorage.setItem('todoList', JSON.stringify(tempCompleteList));
         } catch (e) {
             console.log(e);
         }
@@ -106,13 +121,16 @@ export class Todo extends Component {
             <View style={styles.totoAddItem}>
                 <ListOfTodo
                     taskToggled={this._taskToggled.bind(this)}
-                    dataList = {this.state.name}
+                    dataList={this.state.selectedList}
                     style={styles.addItemForm}
                 />
                 <AddItem
-                    buttonAction={this._addItem}
+                    buttonAction={this._addItem.bind(this)}
                     style={styles.addSubmit}
                 />
+                <Text>
+                    {JSON.stringify(this.state.selectedList)}
+                </Text>
             </View>
         );
     }
