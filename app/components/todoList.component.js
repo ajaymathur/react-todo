@@ -84,6 +84,7 @@ export class Todolist extends Component {
 
     render() {
         return (
+
             <View style={{padding: 50}}>
                 
                 {
@@ -96,9 +97,8 @@ export class Todolist extends Component {
                         </Button>
                     )
                 }
-                    
-                
                 <View>
+                    <Text>{this.props.children}</Text>
                     <Button
                         onPress={this._navigator.bind(this, "new")}
                         title='+'

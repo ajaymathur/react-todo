@@ -119,31 +119,30 @@ export class Todo extends Component {
     render() {
         return (
             <View style={styles.totoAddItem}>
+                <AddItem
+                    buttonAction={this._addItem}
+                    style={styles.addSubmit}
+                />
                 <ListOfTodo
                     taskToggled={this._taskToggled.bind(this)}
                     dataList={this.state.selectedList}
                     style={styles.addItemForm}
                 />
-                <AddItem
-                    buttonAction={this._addItem.bind(this)}
-                    style={styles.addSubmit}
-                />
-                <Text>
-                    {JSON.stringify(this.state.selectedList)}
-                </Text>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+
     toDoAddItem: {
-        flex: 1,
+        flex: 1
     },
     addItemForm: {
-        height: 80,
+        //height: 80,
     },
     addSubmit: {
-        height: 20
+        //height: 20
     }
+
 })
