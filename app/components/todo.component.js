@@ -122,13 +122,13 @@ export class Todo extends Component {
 const styles = StyleSheet.create({
 
     toDoAddItem: {
-        flex: 1,
+        flex: 1
     },
     addItemForm: {
-        height: 80,
+        //height: 80,
     },
     addSubmit: {
-        height: 20
+        //height: 20
     }
 
 })

@@ -121,6 +121,7 @@ overflow:'hidden',
   },
   leftNav :{
     color:'#089de3',
+    padding: 10
   },
   rightNav :{
     color:'#089de3',
@@ -143,7 +144,9 @@ overflow:'hidden',
   
  routerOutlet:{
 backgroundColor :'#fff',
-paddingTop:64,
+marginTop:64,
+padding:10,
+
 flex:1,
 
  }
