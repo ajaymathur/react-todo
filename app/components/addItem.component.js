@@ -1,6 +1,6 @@
 import React, {Component, propTypes} from 'react';
 import {Text, TouchableHighlight, TextInput, View, Button, StyleSheet,TouchableOpacity} from 'react-native';
-
+ import { CustomButton } from './shared/defaultBtnComponent';
 export class AddItem extends Component {
 
     static propTypes = {
@@ -20,25 +20,53 @@ export class AddItem extends Component {
         return (
             <View style={styles.addItem}>
                 <TextInput
-                    style = {{height: 40}}
-                    onChangeText={(text) => this.setState({text})}
+                style = {styles.textBox}
+                onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
-                
-                <Button
-                    title='Add Event'
+                {/*<CustomButton onPress={this._addItem.bind(this)}/>*/}
+                <TouchableHighlight
                     onPress={this._addItem.bind(this)}
-                    style={styles.defaultBtn}
-                />
+                     style={styles.defaultBtn}>
+                    <Text style={styles.btnText}>Add</Text>
+                </TouchableHighlight>
+                {/*<View>
+                    <CustomButton />
+                </View>*/}
             </View>
         );
     }
 }
 
 var styles = StyleSheet.create({
-    defaultBtn: {
-        backgroundColor:'#ff0000',
-        color:'#ffffff',
+    
+    addItem:{
+        //alignItems:'flex-end'
+        flexDirection:'row',
+        justifyContent:'flex-start'
+    },
+    textBox:{
+        flex:2,
+        borderColor:'#ccc',
+        borderWidth:1,
+        height:40,
+        paddingLeft:10
+
+
+    },
+    defaultBtn:{
+       //flex:1
+       //cursor:pointer
+       padding:5,
+       backgroundColor:'#089de3',
+       borderRadius:2,
+       //color:'#ffffff', 
+       justifyContent:'center'
+       
+    },
+    btnText:{
+    color:'#FFF',
+    fontWeight:'bold'
     }
    
 })

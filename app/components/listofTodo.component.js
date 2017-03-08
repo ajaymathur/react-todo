@@ -25,7 +25,7 @@ class ListofTodo extends Component {
         let dataRows = ds.cloneWithRows(dataList);
         return(
             <ListView
-                
+                style={ styles.toDoList}
                 dataSource = {dataRows}
                 renderRow={(rowData, sectionId,rowId) => 
                         <View>
@@ -40,13 +40,17 @@ class ListofTodo extends Component {
 }
 
 const styles = StyleSheet.create({
+    toDoList:{
+        padding:10,
+        marginTop:10
+    },
     list: {
         fontSize: 20,
-        backgroundColor: '#00ff00',
+        backgroundColor: '#ccc',
     },
     listCompleted: {
         fontSize: 20,
-        backgroundColor: '#00ff00',
+        backgroundColor: '#ccc',
         textDecorationLine: 'line-through'
     }
 })
