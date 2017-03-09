@@ -12,8 +12,19 @@ export class Todolist extends Component {
 
     componentDidMount() {
        //this._populateStorage().done();
+       //this._populateStorage().done();
        this.__getList().done();
        //this._populateStorage().done();
+       //this.__initializeStorage().done();
+    }
+
+    /**
+     * @author ajay narain mathur
+     * @description dirty hack to load store at the start of the app
+     * @type not good need to find alternative, I am not proud of this
+     */
+    __initializeStorage() {
+
     }
 
     /**
@@ -47,7 +58,8 @@ export class Todolist extends Component {
 
     _populateStorage = async() => {
         try{
-            await AsyncStorage.setItem('todoList', JSON.stringify({'a324324': [{'title': 'clean', 'completed': true}]}));
+            //await AsyncStorage.setItem('todoList', JSON.stringify({'a324324': [{'title': 'clean', 'completed': true}]}));
+            AsyncStorage.removeItem('todoList');
             console.log('successfully set')
         } catch (e) {
             console.log(e)

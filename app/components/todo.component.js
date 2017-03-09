@@ -8,7 +8,7 @@ export class Todo extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {selectedList: [], completeList: []};
+        this.state = {selectedList: [], completeList: {}};
     }
 
     componentDidMount() {
@@ -106,7 +106,7 @@ export class Todo extends Component {
             let tempCompleteList = this.state.completeList || {};
             tempCompleteList[that.state.listName] = newSelectedTaskList;
             console.log(tempCompleteList);
-            AsyncStorage.setItem('todoList', JSON.stringify(tempCompleteList));
+            await AsyncStorage.setItem('todoList', JSON.stringify(tempCompleteList), error => { console.log(error);});
         } catch (e) {
             console.log(e);
         }
