@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import {
+  StyleSheet,
   Text,
   TouchableHighlight,
   AsyncStorage,
   Button,
-  View
+  View,
 } from "react-native";
 
 export class Todolist extends Component {
@@ -18,6 +19,10 @@ export class Todolist extends Component {
   componentDidMount() {
     this.__getList().done();
     //this._populateStorage().done();
+  }
+
+  componentWillReceiveProps() {
+    this.__getList().done();
   }
 
   /**
@@ -81,21 +86,30 @@ export class Todolist extends Component {
       <View style={{ padding: 50 }}>
 
         {Object.keys(this.state.todoList).map((value, index) => (
-          <Button
-            key={index}
-            title={value}
-            onPress={this._navigator.bind(this, value)}
-          />
+          <View
+            style={styles.buttonview}
+          >
+            <Button
+              key={index}
+              title={value}
+              onPress={this._navigator.bind(this, value)}
+            />
+          </View>
         ))}
         <View>
-          <Text>{this.props.children}</Text>
-          <Button onPress={this._navigator.bind(this, "new")} title="+" />
+          <Button 
+            onPress={this._navigator.bind(this, "new")} 
+            title="+" />
         </View>
-        <Button
-          title="click to pick async storage"
-          onPress={this._navigator.bind(this)}
-        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  buttonview: {
+    borderColor: '#f00',
+    borderWidth: 2,
+    
+  }
+})

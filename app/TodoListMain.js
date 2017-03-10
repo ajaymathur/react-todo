@@ -46,7 +46,7 @@ export default class TodoListMain extends Component {
     if (route.name === "Todolist") {
       return (
         <View style={styles.Todolist}>
-          <Todolist navigator={navigator}>Ajay</Todolist>
+          <Todolist navigator={navigator} />
         </View>
       );
     }
