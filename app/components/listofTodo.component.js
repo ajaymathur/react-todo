@@ -28,7 +28,7 @@ class ListofTodo extends Component {
                 style={ styles.toDoList}
                 dataSource = {dataRows}
                 renderRow={(rowData, sectionId,rowId) => 
-                        <View>
+                        <View style={styles.listview}>
                             <Text onPress= {this.taskToggled.bind(this, rowId)}
                                 style={rowData.completed === 0 ? styles.list : styles.listCompleted}
                             >{rowData.title}</Text>
@@ -46,12 +46,16 @@ const styles = StyleSheet.create({
     },
     list: {
         fontSize: 20,
-        backgroundColor: '#ccc',
     },
     listCompleted: {
         fontSize: 20,
-        backgroundColor: '#ccc',
         textDecorationLine: 'line-through'
+    },
+    listview: {
+        borderBottomWidth: 2,
+        borderBottomColor: '#c2d2c2',
+        padding: 5,
+
     }
 })
 
