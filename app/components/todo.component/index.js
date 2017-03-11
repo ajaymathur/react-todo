@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Text, TouchableHighlight, View, StyleSheet, AsyncStorage, Button} from 'react-native';
 
-import { AddItem } from './addItem.component';
-import ListOfTodo from './listofTodo.component';
+import { AddItem } from '../addItem.component';
+import ListOfTodo from '../listofTodo.component';
 
 export class Todo extends Component {
 
