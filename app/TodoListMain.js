@@ -26,15 +26,7 @@ var NavigationRouteMapper = {
   },
 
   RightButton(route, navigator) {
-    if (route.name === "Todolist") {
-      return (
-        <TouchableHighlight onPress={() => navigator.push({ name: "Todo" })}>
-          <Text style={styles.rightNav}>Create</Text>
-        </TouchableHighlight>
-      );
-    } else {
       return null;
-    }
   },
   Title(route, navigator) {
     return <Text style={styles.title}>Todo</Text>;
