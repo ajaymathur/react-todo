@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderBottomColor: '#c2d2c2',
         padding: 5,
-
+        overflow: 'scroll',
     }
 })
 
