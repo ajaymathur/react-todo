@@ -7,8 +7,8 @@ import {
   View
 } from "react-native";
 
-import { Todolist } from "./components/todoList.component";
-import { Todo } from "./components/todo.component";
+import { Todolist } from "./components/todoList";
+import { Todo } from "./components/todo";
 
 const DEFAULT_VIEW = 'Todolist';
 
