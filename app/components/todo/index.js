@@ -101,7 +101,7 @@ export class Todo extends Component {
     _addItem = async(e) => {
         try {
             var that = this;
-            let tempObj = {title: e, completed: 0};
+            let tempObj = {title: e, completed: 0, toDelete: false };
             let newSelectedTaskList = [...this.state.selectedList, tempObj];
             that.setState({
                 selectedList: newSelectedTaskList,
@@ -110,6 +110,26 @@ export class Todo extends Component {
             
         } catch (e) {
             console.log(e);
+        }
+    }
+
+    /**
+     * @author ajay narain mathur
+     * @description This method will mark a record to be deleted
+     * @type minor feature support
+     * @version 0.0.0
+     */
+    _markToDelete(index) {
+        try {
+            let newList = [...this.state.selectedList];
+            newList.splice(index, 1);
+            //newList[index].toDelete = newList[index].toDelete ? false : true;
+            this.setState({
+                selectedList: newList
+            });
+            this.__updateList( newList ).done();
+        } catch ( e ) {
+            console.log( e )
         }
     }
 
@@ -126,6 +146,7 @@ export class Todo extends Component {
                 />
                 <ListOfTodo
                     taskToggled={this._taskToggled.bind(this)}
+                    markToDelete={this._markToDelete.bind(this)}
                     dataList={this.state.selectedList}
                     style={styles.addItemForm}
                 />
