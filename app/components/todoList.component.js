@@ -6,6 +6,7 @@ import {
   AsyncStorage,
   Button,
   View,
+  TouchableOpacity,
 } from "react-native";
 
 export class Todolist extends Component {
@@ -57,7 +58,7 @@ export class Todolist extends Component {
   _populateStorage = async () => {
     try {
       //await AsyncStorage.setItem('todoList', JSON.stringify({'a324324': [{'title': 'clean', 'completed': true}]}));
-      //AsyncStorage.removeItem('todoList');
+      AsyncStorage.removeItem('todoList');
       console.log("successfully set");
     } catch (e) {
       console.log(e);
@@ -83,33 +84,72 @@ export class Todolist extends Component {
 
   render() {
     return (
-      <View style={{ padding: 50 }}>
-
+      <View style={styles.taskCardsContainer}>
         {Object.keys(this.state.todoList).map((value, index) => (
-          <View
+          <TouchableOpacity
             style={styles.buttonview}
+            key={index}
+            onPress={this._navigator.bind(this, value)}
           >
-            <Button
-              key={index}
-              title={value}
-              onPress={this._navigator.bind(this, value)}
-            />
-          </View>
+            <View style={styles.inTileList}>
+              {this.state.todoList[value].map((value, index ) => (
+                <Text 
+                  key={index}
+                  style={value.completed === 0 ? styles.inListText : styles.inListTextCompleted}
+                >{value.title}
+                </Text>
+              ))}
+            </View>
+          </TouchableOpacity>
         ))}
-        <View>
-          <Button 
-            onPress={this._navigator.bind(this, "new")} 
-            title="+" />
-        </View>
+        <TouchableOpacity
+          style={styles.buttonview}
+          onPress={this._navigator.bind(this, "new")}
+        >
+          <View style={styles.inTileAddList}>
+              <Text
+                style={styles.inAddListText}
+              >+
+              </Text>
+            </View>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  taskCardsContainer: {
+    flex: 1,
+    padding: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
   buttonview: {
-    borderColor: '#f00',
+    borderColor: '#999999',
     borderWidth: 2,
-    
+    borderRadius: 5,
+    height: 150,
+    width: 150,
+    marginBottom: 15,
+  },
+  inTileList: {
+    padding: 10,
+  },
+  inListText: {
+    color: '#929292'
+  },
+  inListTextCompleted: {
+    color: '#929292',
+    textDecorationLine: 'line-through',
+  },
+  inTileAddList: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inAddListText: {
+    fontSize: 100,
   }
 })

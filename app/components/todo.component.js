@@ -13,7 +13,6 @@ export class Todo extends Component {
 
     componentDidMount() {
         this._getList().done();
-        //this.__resetSynStore().done();
     }
 
     /**
@@ -38,7 +37,7 @@ export class Todo extends Component {
             }
             let value = await AsyncStorage.getItem('todoList');
             let parsedValue = JSON.parse(value);
-            if (parsedValue != null ) {
+            if ( parsedValue ) {
                 this.setState({
                     'completeList': parsedValue,
                 });
@@ -65,18 +64,23 @@ export class Todo extends Component {
             newList[index].completed = newList[index].completed === 0 ? 1 : 0;
             this.setState({
                 selectedList: newList
-            })
+            });
+            this.__updateList(newList).done();
         } catch(e) {
             console.log(e);
         }
     }
 
-    __resetSynStore = async() => {
-        try {
-            await AsyncStorage.removeItem('testing')
-        } catch(e) {
-            console.log(e);
-        }
+    /**
+     * @author ajay narain mathur
+     * update the task list
+     * @type priority high
+     */
+    __updateList = async( newSelectedTaskList ) => {
+        let tempCompleteList = this.state.completeList || {};
+        tempCompleteList[this.state.listName] = newSelectedTaskList;
+        console.log(tempCompleteList);
+        await AsyncStorage.setItem('todoList', JSON.stringify(tempCompleteList), error => { console.log(error);});
     }
 
     __getUniqueId() {
@@ -102,11 +106,8 @@ export class Todo extends Component {
             that.setState({
                 selectedList: newSelectedTaskList,
             });
-
-            let tempCompleteList = this.state.completeList || {};
-            tempCompleteList[that.state.listName] = newSelectedTaskList;
-            console.log(tempCompleteList);
-            await AsyncStorage.setItem('todoList', JSON.stringify(tempCompleteList), error => { console.log(error);});
+            this.__updateList( newSelectedTaskList ).done();
+            
         } catch (e) {
             console.log(e);
         }
