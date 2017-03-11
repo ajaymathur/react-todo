@@ -59,13 +59,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderBottomColor: '#c2d2c2',
         padding: 5,
-        flex: 1,
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-    },
-    actionImage: {
-        height: 30,
-        width: 20,
+        overflow: 'scroll',
     }
 })
 
