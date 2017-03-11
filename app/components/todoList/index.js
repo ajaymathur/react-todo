@@ -5,7 +5,8 @@ import {
   TouchableHighlight,
   AsyncStorage,
   Button,
-  View,
+  View, 
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
 
@@ -85,6 +86,16 @@ export class Todolist extends Component {
   render() {
     return (
       <View style={styles.taskCardsContainer}>
+        {/*<TouchableOpacity
+          style={styles.buttonview}
+          onPress={this._populateStorage.bind(this)}>
+          <View style={styles.inTileAddList}>
+              <Text
+                style={styles.inAddListText}
+              >-
+              </Text>
+            </View>
+        </TouchableOpacity>*/}
         {Object.keys(this.state.todoList).map((value, index) => (
           <TouchableOpacity
             style={styles.buttonview}
@@ -120,11 +131,12 @@ export class Todolist extends Component {
 
 const styles = StyleSheet.create({
   taskCardsContainer: {
-    flex: 1,
-    padding: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+     // flex: 1,
+     padding: 10,
+      flexDirection: 'row',
+     flexWrap: 'wrap',
+     justifyContent: 'space-between',
+
   },
   buttonview: {
     borderColor: '#999999',
@@ -136,6 +148,7 @@ const styles = StyleSheet.create({
   },
   inTileList: {
     padding: 10,
+    overflow: 'hidden'
   },
   inListText: {
     color: '#929292'

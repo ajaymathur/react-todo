@@ -4,7 +4,8 @@ import {
   Navigator,
   TouchableHighlight,
   Text,
-  View
+  View,
+  ScrollView
 } from "react-native";
 
 import { Todolist } from "./components/todoList";
@@ -37,9 +38,9 @@ export default class TodoListMain extends Component {
   initRenderScene = (route, navigator) => {
     if (route.name === "Todolist") {
       return (
-        <View style={styles.Todolist}>
-          <Todolist navigator={navigator} />
-        </View>
+        <ScrollView style={styles.Todolist}>
+          <Todolist  navigator={navigator} />
+        </ScrollView>
       );
     }
     if (route.name === "Todo") {
@@ -78,8 +79,8 @@ export default class TodoListMain extends Component {
 
 const styles = StyleSheet.create({
   Todolist: {
-    flexDirection: "column",
-    justifyContent: "space-between"
+    // flexDirection: "column",
+    // justifyContent: "space-between"
   },
   navBar: {
     paddingTop: 20,
