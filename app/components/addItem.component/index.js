@@ -8,7 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity
 } from "react-native";
-import { CustomButton } from "./shared/defaultBtnComponent";
+import { CustomButton } from "../shared/defaultBtnComponent";
 export class AddItem extends Component {
   static propTypes = {
     buttonAction: React.PropTypes.func.isRequired
