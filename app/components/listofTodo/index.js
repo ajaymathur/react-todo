@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {View, ListView, Text, StyleSheet} from 'react-native';
+import {View, ListView, Text, StyleSheet, Image, TouchableHighlight} from 'react-native';
 
 class ListofTodo extends Component {
 
@@ -7,8 +7,12 @@ class ListofTodo extends Component {
         super(props);
     }
 
-    taskToggled(rowId) {
-        this.props.taskToggled(rowId);
+    taskToggled( rowId ) {
+        this.props.taskToggled( rowId );
+    }
+
+    markToDelete( rowId ) {
+        this.props.markToDelete( rowId );
     }
 
     render() {
@@ -24,6 +28,12 @@ class ListofTodo extends Component {
                             <Text onPress= {this.taskToggled.bind(this, rowId)}
                                 style={rowData.completed === 0 ? styles.list : styles.listCompleted}
                             >{rowData.title}</Text>
+                            <TouchableHighlight
+                                onPress={this.markToDelete.bind(this, rowId)}
+                                style={{flex: 1}}>
+                                <Image style={styles.actionImage} 
+                                        source={require('./delete.png')}/>
+                            </TouchableHighlight>
                         </View>
                     }
             />
@@ -38,10 +48,12 @@ const styles = StyleSheet.create({
     },
     list: {
         fontSize: 20,
+        flex: 11,
     },
     listCompleted: {
         fontSize: 20,
-        textDecorationLine: 'line-through'
+        textDecorationLine: 'line-through',
+        flex: 11,
     },
     listview: {
         borderBottomWidth: 2,
